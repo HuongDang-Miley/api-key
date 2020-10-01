@@ -1,11 +1,12 @@
 // // Weather API- https://openweathermap.org/api
 const axios = require('axios')
-const key = '4e6233eca32618abe38e4e44d18f65df'
-
+const readline = require('readline')
+const interface = readline.createInterface({ input: process.stdin, output: process.stdout })
+const key = require('./key.js')
 
 const printWeather = async (zipCode) => {
     try {
-        const url = `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode}&units=imperial&appid=4e6233eca32618abe38e4e44d18f65df`
+        const url = `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode}&units=imperial&appid=${key}`
         const response = await axios.get(url)
         const data = await response.data
         const {
@@ -44,7 +45,6 @@ const printWeather = async (zipCode) => {
     }
 }
 
-const readline = require('readline')
-const interface = readline.createInterface({ input: process.stdin, output: process.stdout })
+
 interface.question(`Enter Your Zip Code To See Weather Forecast:\n`, printWeather)
 
